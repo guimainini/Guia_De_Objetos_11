@@ -47,12 +47,24 @@ public class Hora {
         this.segundo = segundo;
     }
 
-    public String toString() {
-        return "Hora{" +
-                "hora=" + hora +
-                ", minuto=" +minuto +
-                ", segundo=" + segundo +
-                '}';
+    public String toString (){
+        String horita, minutito, segundito;
+        if (this.hora < 10){
+            horita = "0"+this.hora;
+        }else{
+            horita = ""+this.hora;
+        }
+        if (this.minuto < 10){
+            minutito = ":0"+this.minuto;
+        }else{
+            minutito = ":"+this.minuto;
+        }
+        if (this.segundo < 10){
+            segundito = ":0"+this.segundo;
+        }else{
+            segundito = ":"+this.segundo;
+        }
+        return horita+minutito+segundito;
     }
     public void agregarHora(){
         System.out.print("Ingrese una hora por favor... : ");
@@ -83,28 +95,30 @@ public class Hora {
 
     public void avanzar(){
         segundo++;
-        while(segundo==60){
-            minuto++;
+        if( segundo == 60){
             segundo = 0;
-            while(minuto==60){
-                hora++;
+            minuto++;
+        }else if (minuto == 60){
                 minuto = 0;
+                hora++;
+            }else if(hora == 24){
+                hora = 0;
             }
-        }
     }
+
     public void retroceder(){
         segundo--;
-        while(segundo==0) {
+        if (segundo == -1){
+            segundo = 59;
             minuto--;
-            segundo = 60;
+        }else if (minuto == -1){
+            minuto = 59;
+            hora --;
+        }else if (hora == -1){
+            hora = 23;
         }
-        while(minuto==0){
-                hora--;
-                System.out.println("2222");
-                minuto = 60;
-            }
 
-        }
+    }
 
 
 
